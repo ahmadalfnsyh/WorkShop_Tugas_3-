@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Cuaca | Ahmad Alifansyah</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Cuaca</h1>
+    <h2 id="date">Tanggal otomatis</h2>
+
+    <div class="search-box">
+      <input type="text" id="city-input" placeholder="Enter city..." />
+      <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="weather-display">
+      <img id="weather-icon" src="assets/cerah siang.png" alt="weather icon" />
+      <h3 id="temp">26°C</h3>
+      <p id="description">Cerah</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
