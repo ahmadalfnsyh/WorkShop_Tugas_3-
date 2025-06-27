@@ -64,9 +64,12 @@ function capitalize(text) {
 
 function updateDate() {
   const today = new Date();
+   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const dayName = days[today.getDay()];
+
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
   const formattedDate = today.toLocaleDateString('id-ID', options);
-  document.getElementById('date').innerText = formattedDate;
+  document.getElementById('date').innerText = `${dayName}, ${formattedDate}`;
 }
 
 updateDate();
