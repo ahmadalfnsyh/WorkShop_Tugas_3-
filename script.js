@@ -1,60 +1,48 @@
 const apiKey = '05ee01d51cd1cc26f90e8f92fff20b4c';
 
 function getWeather() {
-  const city = document.getElementById('city-input').value;
+  const city = document.getElementById('city-input').value.trim();
+  if (!city) {
+    alert('Please enter a city name.');
+    return;
+  }
+
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=en&appid=${apiKey}`;
 
   fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) throw new Error('City not found');
+      return response.json();
+    })
     .then(data => {
       const temp = Math.round(data.main.temp);
-      const desc = data.weather[0].description;
+      const desc = capitalize(data.weather[0].description);
       const iconCode = data.weather[0].icon;
 
       document.getElementById('temp').innerText = `${temp}°C`;
-      document.getElementById('description').innerText = capitalize(desc);
+      document.getElementById('description').innerText = desc;
       document.getElementById('weather-icon').src = getCustomIcon(iconCode);
+
       updateBackgroundByCityTime(data.dt, data.timezone);
     })
     .catch(error => {
-      alert('city not found!');
+      alert('City not found!');
       console.error(error);
     });
 }
 
 function getCustomIcon(code) {
   const simplifiedMap = {
-    // Cerah
-    '01d': 'sunny.gif',
-    '01n': 'sunny.gif',
-
-    // Sebagian berawan
-    '02d': 'sunny.gif',
-    '02n': 'sunny.gif',
-    '03n': 'cloudy.gif',
-    '03d': 'cloudy.gif',
-    '04d': 'cloudy.gif',
-    '04n': 'cloudy.gif',
-
-    // Hujan
-    '09d': 'rainy.gif',
-    '09n': 'rainy.gif',
-    '10d': 'rainy.gif',
-    '10n': 'rainy.gif',
-
-    // Badai
-    '11d': 'stormy.gif',
-    '11n': 'stormy.gif',
-
-    // Salju
-    '13d': 'snowy.gif',
-    '13n': 'snowy.gif',
-
-    // Lain-lain dianggap default
-    '50d': 'windy.gif',
-    '50n': 'windy.gif'
+    '01d': 'sunny.gif', '01n': 'sunny.gif',
+    '02d': 'sunny.gif', '02n': 'sunny.gif',
+    '03d': 'cloudy.gif', '03n': 'cloudy.gif',
+    '04d': 'cloudy.gif', '04n': 'cloudy.gif',
+    '09d': 'rainy.gif', '09n': 'rainy.gif',
+    '10d': 'rainy.gif', '10n': 'rainy.gif',
+    '11d': 'stormy.gif', '11n': 'stormy.gif',
+    '13d': 'snowy.gif', '13n': 'snowy.gif',
+    '50d': 'windy.gif', '50n': 'windy.gif'
   };
-
   return `assets/${simplifiedMap[code] || 'cloudy.gif'}`;
 }
 
@@ -64,29 +52,34 @@ function capitalize(text) {
 
 function updateDate() {
   const today = new Date();
-   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const dayName = days[today.getDay()];
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December"];
 
-  const options = { day: 'numeric', month: 'long', year: 'numeric' };
-  const formattedDate = today.toLocaleDateString('id-ID', options);
-  document.getElementById('date').innerText = `${dayName}, ${formattedDate}`;
+  const dayName = days[today.getDay()];
+  const day = today.getDate();
+  const month = months[today.getMonth()];
+  const year = today.getFullYear();
+
+  const formattedDate = `${dayName}, ${day} ${month} ${year}`; // Koma hanya setelah hari
+
+  document.getElementById('date').innerText = formattedDate;
 }
 
-updateDate();
 
 function updateBackgroundByTime() {
   const hour = new Date().getHours();
-  const isDay = hour >= 6 && hour < 18; // siang: jam 6–18
+  const isDay = hour >= 6 && hour < 18;
   document.body.className = isDay ? 'day' : 'night';
 }
-
-updateBackgroundByTime();
 
 function updateBackgroundByCityTime(timestamp, timezoneOffset) {
-  const cityTime = new Date((timestamp + timezoneOffset) * 1000); // Convert ke ms
-  const hour = cityTime.getUTCHours(); // Karena sudah ditambahkan offset, cukup pakai getUTCHours()
-  const isDay = hour >= 6 && hour < 18; // 06:00–17:59 dianggap siang
-
+  const cityTime = new Date((timestamp + timezoneOffset) * 1000);
+  const hour = cityTime.getUTCHours();
+  const isDay = hour >= 6 && hour < 18;
   document.body.className = isDay ? 'day' : 'night';
 }
 
+// Run on load
+updateDate();
+updateBackgroundByTime();

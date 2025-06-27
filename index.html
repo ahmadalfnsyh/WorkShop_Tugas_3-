@@ -10,35 +10,37 @@
 </head>
 
 <body>
-  <div class="window">
-    <div class="title-bar">
-      <span>Weather.exe</span>
-      <div class="window-controls">
-        <div class="dot red"></div>
-        <div class="dot yellow"></div>
-        <div class="dot green"></div>
+  <div class="wrapper">
+    <div class="window">
+      <div class="title-bar">
+        <span>Weather.exe</span>
+        <div class="window-controls">
+          <div class="dot white"></div>
+          <div class="dot grey"></div>
+          <div class="dot black"></div>
       </div>
     </div>
 
-    <div class="container">
-      <h2 id="date">Date</h2>
+      <div class="container">
+        <h2 id="date">Date</h2>
 
-      <div class="row-box">
-        <div class="search-row">
-          <input type="text" id="city-input" placeholder="Enter city..." />
-          <button onclick="getWeather()">Search</button>
-        </div>
-      </div>
-
-      <div class="weather-display">
-        <img id="weather-icon" src="assets/cloudy.gif" alt="Default weather icon"/>
-          <div class="label-box">
-            <h3 id="temp">--°C</h3>
-            <p id="description">How's the sky?</p>
+        <div class="row-box">
+          <div class="search-row">
+            <input type="text" id="city-input" placeholder="Enter city..." />
+            <button onclick="getWeather()">Search</button>
           </div>
         </div>
+
+        <div class="weather-display">
+          <img id="weather-icon" src="assets/cloudy.gif" alt="Default weather icon"/>
+            <div class="label-box">
+              <h3 id="temp">--°C</h3>
+              <p id="description">How's the sky?</p>
+            </div>
+          </div>
+        </div>
+     </div>
     </div>
-  </div>
 </body>
 
 
