@@ -1,19 +1,20 @@
+/* Semua elemen ikut menghitung padding & border di dalam width/height */
 * {
     box-sizing: border-box;
 }
 
+/* Gaya umum untuk body */
 body {
     background-color: grey;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', cursive; /* Font bergaya retro */
     text-align: center;
     margin: 0;
     padding: 0;
-    display: flex;
+    display: flex; /* Untuk menempatkan isi di tengah */
     justify-content: center;
     align-items: center;
     height: 100vh;
-    image-rendering: pixelated;
-    transition: background-color 0.8 ease;
+    transition: background-color 0.8 ease; /* Transisi warna background */
 }
 
 body.day {
@@ -24,6 +25,7 @@ body.night {
   background-color: #0b1a3a;
 }
 
+/* Kotak utama */
 .container {
     background: whitesmoke;
     width: 100%;
@@ -34,33 +36,38 @@ body.night {
     margin: 0;
 }
 
+/* Menghilangkan margin atas dari judul pertama */
 .container h1:first-child {
     margin-top: 0;
 }
 
+/* Spasi antar teks */
 h1, h2, h3, p {
     margin: 6px 0;
 }
 
+/* Tampilan tanggal */
 #date {
-  font-size: 16px; /* atur sesuai keinginan */
+  font-size: 16px;
   color: black;
   margin-top: 5px;
   margin-bottom: 15px;
 }
 
-
+/* Kotak pencarian */
 .search-box {
     margin: 20px 0;
 }
 
+/* Baris input + tombol sejajar di tengah */
 .search-row {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 8px; /* Jarak antar input dan tombol */
   width: 100%;
 }
 
+/* Input teks kota */
 input {
     padding: 10px;
     height: 40px;
@@ -72,38 +79,36 @@ input {
     box-shadow: 4px 4px 0 #000;
 }
 
-.search-row {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-}
-
+/* Tombol cari */
 button {
     padding: 10px 16px;
     font-size: 15px;
     font-family: 'Press Start 2P', cursive;
-    background: grey        ;
+    background: grey;
     color: #000;
     border: 4px solid #000;
     cursor: pointer;
     box-shadow: 4px 4px 0 #000;
 }
 
+/* Efek hover tombol */
 button:hover {
     background: white;
 }
 
+/* Gambar cuaca */
 .weather-display img {
     width: 300px;
     height: 280px;
     margin-top: 5px;
 }
 
+/* Judul cuaca */
 .weather-display h2 {
     font-size: 24px;
 }
 
+/* Kotak tampilan cuaca seperti jendela */
 .window {
   border: 4px solid #000;
   width: 440px;
@@ -112,6 +117,7 @@ button:hover {
   padding: 0;
 }
 
+/* Bar atas "jendela" */
 .title-bar {
   background-color: #444;
   color: white;
@@ -124,47 +130,48 @@ button:hover {
   border-bottom: 4px solid #000;
 }
 
+/* Lingkaran kontrol jendela (seperti di macOS) */
 .window-controls {
   display: flex;
   gap: 6px;
 }
 
+/* Tampilan titik kontrol */
 .dot {
   width: 12px;
   height: 12px;
   border: 2px solid #000;
   box-shadow: 2px 2px 0 #000;
   image-rendering: pixelated;
-  box-shadow: 2px 2px 0 #000;
 }
 
 .white {
-  background-color: #ffff
+  background-color: #ffff;
 }
-
 .grey {
-  background-color: #bcbc
+  background-color: #bcbc;
 }
-
 .black {
-  background-color: #0000
+  background-color: #0000;
 }
 
-
+/* Kotak label hasil cuaca */
 .label-box {
   background: #bcbcbc;
   border: 4px solid #000;
   padding: 10px;
   box-shadow: 4px 4px 0 #000;
-  width: calc(65% + 16px + 8px); /* input + button + gap */
+  width: calc(65% + 16px + 8px); /* lebar input + tombol + jarak */
   margin: 10px auto;
   display: block;
 }
 
+/* Spasi antar elemen di dalam label-box */
 .label-box h3, .label-box p {
     margin: 5px 0;
 }
 
+/* Animasi mengambang (untuk efek lucu) */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -174,6 +181,7 @@ button:hover {
   }
 }
 
+/* Kelas yang menggunakan animasi float */
 .wrapper {
   animation: float 1.5s ease-in-out infinite;
 }
